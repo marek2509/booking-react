@@ -5,9 +5,8 @@ import Menu from './components/Menu/Menu';
 import Hotels from './components/Hotels/Hotels';
 
 class App extends Component {
-constructor(props){
-	super(props);
-	this.state = {
+
+	state = {
 		hotels: [
 			{
 				id: 1,
@@ -27,7 +26,7 @@ constructor(props){
 			},
 		]
 	}
-}
+
 
 
 	render() {
