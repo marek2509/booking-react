@@ -4,7 +4,7 @@ import Hotel from './Hotel/Hotel';
 import styles from './Hotels.module.css';
 
 const propTypes = {
-	hotel: PropTypes.array.isRequired,
+	hotels: PropTypes.array.isRequired,
 };
 
 class Hotels extends Component {

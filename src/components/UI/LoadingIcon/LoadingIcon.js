@@ -2,9 +2,10 @@ import React from 'react';
 
 export default function LoadingIcon() {
 	return (
-		<div class="d-flex justify-content-center">
-			<span class="sr-only">Ładowanie...</span>
-			<div class="spinner-border m-5" role="status"></div>
+		<div className="d-flex justify-content-center">
+			<div className="spinner-border m-5" role="status">
+				{/* <span className="sr-only">Ładowanie...</span> */}
+			</div>
 		</div>
 	);
 }
