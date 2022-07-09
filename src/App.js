@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
 import Hotels from './components/Hotels/Hotels';
+import LoadingIcon from './components/UI/LoadingIcon/LoadingIcon';
 
 class App extends Component {
 	hotels = [
@@ -10,7 +11,7 @@ class App extends Component {
 			id: 1,
 			name: 'Pod akacjami',
 			city: 'Białystok',
-			rating: '8.3',
+			rating: 8.3,
 			description:
 				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 			image: '',
@@ -19,7 +20,7 @@ class App extends Component {
 			id: 2,
 			name: 'Poniatowski',
 			city: 'Suchowola',
-			rating: '8.2',
+			rating: 8.2,
 			description:
 				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 			image: '',
@@ -38,11 +39,6 @@ class App extends Component {
 	// 	this.setState({hotels} )
 	// }
 
-	constructor(props) {
-		super(props);
-		console.log('komponent konstruktor');
-	}
-
 	searchHandler = (termDec) => {
 		console.log('szukaj z app', termDec);
 		const hotels = [...this.hotels].filter((x) =>
@@ -59,17 +55,6 @@ class App extends Component {
 			});
 		}, 1000);
 		console.log('component zamontowany');
-
-		setTimeout(() => {
-			this.setState({
-				hotels: this.hotels,
-				loading: true,
-			});
-		}, 3000);
-	}
-
-	componentDidUpdate() {
-		console.log('Komponent zaktualizowany');
 	}
 
 	render() {
@@ -79,11 +64,11 @@ class App extends Component {
 				{/* <Header onSearch={(termUse) => this.searchHandler(termUse)} /> */}
 				<Header onSearch={this.searchHandler} />
 				<Menu />
-				{this.state.loading ? (
-					<p>Ładowanie danych...</p>
-				) : (
+				{this.state.loading ? 
+					<LoadingIcon />
+				 : 
 					<Hotels hotels={this.state.hotels} />
-				)}
+				}
 			</div>
 		);
 	}

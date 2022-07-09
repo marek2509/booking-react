@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Hotel from './Hotel/Hotel';
 import styles from './Hotels.module.css';
 
+const propTypes = {
+	hotel: PropTypes.array.isRequired,
+};
+
 class Hotels extends Component {
-	componentWillUnmount() {
-		console.log('komponent będzie odmontowany - hotels');
-	}
 	render() {
 		return (
 			<div className={styles.container}>
@@ -18,5 +20,7 @@ class Hotels extends Component {
 		);
 	}
 }
+
+Hotels.propTypes = propTypes;
 
 export default Hotels;
