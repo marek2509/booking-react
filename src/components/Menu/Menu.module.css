@@ -11,6 +11,7 @@ a {
 
 .menuItem {
 	display: inline-block;
+	margin: 0 10px;
 }
 
 .menuContainer {

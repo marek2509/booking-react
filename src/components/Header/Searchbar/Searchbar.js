@@ -5,13 +5,10 @@ function Searchbar() {
 		<div className="d-flex">
 				<input
 					className="form-control"
-					// style={{
-					// 	width: '100% -20px',
-					// }}
 					type="text"
-					placeholder="Szukaj"
+					placeholder="Szukaj..."
 				/>
-			<button className="btn btn-primary">Szukaj!</button>
+			<button className="ml-2 btn btn-secondary">Szukaj!</button>
 		</div>
 	);
 }

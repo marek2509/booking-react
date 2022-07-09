@@ -1,5 +1,43 @@
 .hotel{
-    border: 1px solid #cdcdcd;
     margin-bottom: 20px;
-    background-color: gainsboro;
+    background-color: hsl(0, 0%, 98%);
+}
+.title{
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-bottom: 0;
+}
+
+.description{
+    color: grey;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+img{
+    max-height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.city{
+    font-weight: bold;
+}
+
+
+
+.button{
+    align-self: flex-end;
+}
+
+.containerRating{
+    text-align: right;
+}
+
+.numberOpinions{
+    background-color: gray;
+    color: white;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    padding: 0 2px;
 }
