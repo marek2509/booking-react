@@ -3,10 +3,10 @@ import Searchbar from './Searchbar/Searchbar'
 import styles from './Header.module.css';
 
 
-function Header() {
+function Header(props) {
 	return (
 		<header className={`${styles.header}`}>
-				<Searchbar />
+				<Searchbar onSearch={props.onSearch} />
 		</header>
 	);
 }

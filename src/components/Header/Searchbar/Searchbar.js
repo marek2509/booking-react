@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styles from './Searchbar.module.css';
 
-function Searchbar() {
+function Searchbar(props) {
 	const [term, setTerm] = useState(null);
 
 	const search = () => {
-		console.log('Szukaj', term);
+		props.onSearch(term);
 	};
 
 	const onKeyDownHandler = (e) => {
