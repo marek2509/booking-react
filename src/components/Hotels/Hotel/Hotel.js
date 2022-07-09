@@ -17,21 +17,15 @@ function Hotel(props) {
 							</div>
 							<div className={`col ${styles.containerRating}`}>
 								<h5>Ocena: {props.rating}</h5>
-								<a
-									href="#"
-									className={`btn btn-primary mt-2 px-5`}
-								>
+								<a href="#" className={`btn btn-primary mt-2 px-5`}>
 									Pokaż
 								</a>
 							</div>
 						</div>
 					</div>
 
-
 					<div className={`col-12 ${styles.contDesc}`}>
-						<p>
-							{props.description}
-						</p>
+						<p>{props.description}</p>
 					</div>
 				</div>
 			</div>
