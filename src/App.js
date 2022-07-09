@@ -29,7 +29,14 @@ class App extends Component {
 		hotels: this.hotels
 	}
 
-	searchHandler(termDec){
+	// searchHandler(termDec){
+	// 	console.log('szukaj z app', termDec)
+	// 	const hotels = [...this.hotels]
+	// 	.filter(x => x.name.toUpperCase().includes(termDec.toUpperCase()));
+	// 	this.setState({hotels} )
+	// }
+
+	searchHandler = (termDec) => {
 		console.log('szukaj z app', termDec)
 		const hotels = [...this.hotels]
 		.filter(x => x.name.toUpperCase().includes(termDec.toUpperCase()));
@@ -39,7 +46,8 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<Header onSearch={(termUse) => this.searchHandler(termUse)} />
+				{/* <Header onSearch={(termUse) => this.searchHandler(termUse)} /> */}
+				<Header onSearch={this.searchHandler} />
 				<Menu />
 				<Hotels hotels={this.state.hotels} />
 			</div>
