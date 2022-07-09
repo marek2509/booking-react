@@ -34,7 +34,7 @@ class App extends Component {
 			<div className="App">
 				<Header />
 				<Menu />
-				<Hotels />
+				<Hotels hotels={this.state.hotels} />
 			</div>
 		);
 	}

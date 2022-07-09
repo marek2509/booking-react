@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './Searchbar.module.css';
 
 function Searchbar() {
-	const [term, setTerm] = useState();
+	const [term, setTerm] = useState(null);
 
 	const search = () => {
 		console.log('Szukaj', term);
