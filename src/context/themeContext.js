@@ -5,4 +5,6 @@ const ThemeContext = React.createContext({
 	onChangeTheme: () => {},
 });
 
+ThemeContext.displayName = "ThemeContext";
+
 export default ThemeContext;
