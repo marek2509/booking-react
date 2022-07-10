@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
 import Hotels from './components/Hotels/Hotels';
 import LoadingIcon from './components/UI/LoadingIcon/LoadingIcon';
+import Searchbar from './components/UI/Searchbar/Searchbar';
 
 class App extends Component {
 	hotels = [
@@ -30,6 +31,7 @@ class App extends Component {
 	state = {
 		hotels: [],
 		loading: true,
+		term: '',
 	};
 
 	// searchHandler(termDec){
@@ -62,13 +64,15 @@ class App extends Component {
 		return (
 			<div className="App">
 				{/* <Header onSearch={(termUse) => this.searchHandler(termUse)} /> */}
-				<Header onSearch={this.searchHandler} />
+				<Header>
+					<Searchbar onSearch={this.searchHandler} />
+				</Header>
 				<Menu />
-				{this.state.loading ? 
+				{this.state.loading ? (
 					<LoadingIcon />
-				 : 
+				) : (
 					<Hotels hotels={this.state.hotels} />
-				}
+				)}
 			</div>
 		);
 	}
