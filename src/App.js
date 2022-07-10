@@ -87,16 +87,14 @@ class App extends Component {
 		const footer = <Footer />;
 
 		return (
-			<ThemeContext.Provider value={{
-				theme: this.state.theme,
-				onChange: () => this.changeTheme()}}>
+			<ThemeContext.Provider
+				value={{
+					color: this.state.theme,
+					onChangeTheme: () => this.changeTheme(),
+				}}
+			>
 				{/* <Header onSearch={(termUse) => this.searchHandler(termUse)} /> */}
-				<Layout 
-					header={header} 
-					menu={menu} 
-					content={content} 
-					footer={footer} 
-				/>
+				<Layout header={header} menu={menu} content={content} footer={footer} />
 			</ThemeContext.Provider>
 		);
 	}
