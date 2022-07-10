@@ -8,7 +8,7 @@ const propTypes = {
 
 function Searchbar(props) {
 	const [term, setTerm] = useState('');
-
+	
 	const search = () => {
 		props.onSearch(term);
 	};
@@ -31,7 +31,7 @@ function Searchbar(props) {
 			/>
 			<button
 				onClick={search}
-				className={`${styles.btnSearch} btn btn-secondary`}
+				className={`${styles.btnSearch} btn btn-${props.theme}`}
 			>
 				Szukaj!
 			</button>
