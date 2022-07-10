@@ -37,8 +37,8 @@ function Hotel(props) {
 							<div className={`col ${styles.containerRating}`}>
 								<h5>Ocena: {props.rating}</h5>
 								<ThemeContext>
-									{(value) => (
-										<a href="#" className={`btn btn-${value} mt-2 px-5`}>
+									{({theme}) => (
+										<a href="#" className={`btn btn-${theme} mt-2 px-5`}>
 											Pokaż
 										</a>
 									)}

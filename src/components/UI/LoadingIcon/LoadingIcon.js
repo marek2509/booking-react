@@ -4,9 +4,9 @@ import ThemeContext from '../../../context/themeContext';
 export default function LoadingIcon(props) {
 	return (
 		<ThemeContext.Consumer>
-			{(value) => (
+			{({theme}) => (
 				<div className="d-flex justify-content-center">
-					<div className={`spinner-border m-5 text-${value}`} role="status">
+					<div className={`spinner-border m-5 text-${theme}`} role="status">
 						{/* <span className="sr-only">Ładowanie...</span> */}
 					</div>
 				</div>

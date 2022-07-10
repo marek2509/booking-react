@@ -31,10 +31,10 @@ function Searchbar(props) {
 				placeholder="Szukaj..."
 			/>
 			<ThemeContext.Consumer>
-				{(value) => (
+				{({theme}) => (
 					<button
 						onClick={search}
-						className={`${styles.btnSearch} btn btn-${value}`}
+						className={`${styles.btnSearch} btn btn-${theme}`}
 					>
 						Szukaj!
 					</button>
