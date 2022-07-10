@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Searchbar.module.css';
+import ThemeContext from '../../../context/themeContext';
 
 const propTypes = {
 	onSearch: PropTypes.func.isRequired,
@@ -8,7 +9,7 @@ const propTypes = {
 
 function Searchbar(props) {
 	const [term, setTerm] = useState('');
-	
+
 	const search = () => {
 		props.onSearch(term);
 	};
@@ -29,12 +30,16 @@ function Searchbar(props) {
 				type="text"
 				placeholder="Szukaj..."
 			/>
-			<button
-				onClick={search}
-				className={`${styles.btnSearch} btn btn-${props.theme}`}
-			>
-				Szukaj!
-			</button>
+			<ThemeContext.Consumer>
+				{(value) => (
+					<button
+						onClick={search}
+						className={`${styles.btnSearch} btn btn-${value}`}
+					>
+						Szukaj!
+					</button>
+				)}
+			</ThemeContext.Consumer>
 		</div>
 	);
 }

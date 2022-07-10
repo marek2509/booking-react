@@ -8,8 +8,10 @@ import Searchbar from './components/UI/Searchbar/Searchbar';
 import Layout from './components/Layout/Layout';
 import Footer from './components/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
+import ThemeContext from './context/themeContext';
 
 class App extends Component {
+	static contextType = ThemeContext;
 	hotels = [
 		{
 			id: 1,
@@ -64,36 +66,36 @@ class App extends Component {
 				loading: false,
 			});
 		}, 1000);
-		console.log('component zamontowany');
 	}
 
 	render() {
-		console.log('komponent wyrenderowany');
-		return (
-			<div className="App">
-				{/* <Header onSearch={(termUse) => this.searchHandler(termUse)} /> */}
+		const header = (
+			<Header>
+				<Searchbar onSearch={this.searchHandler} />
+				<ThemeButton onChange={() => this.changeTheme()} />
+			</Header>
+		);
 
-				<Layout
-					header={
-						<Header>
-							<Searchbar
-								onSearch={this.searchHandler}
-								theme={this.state.theme}
-							/>
-							<ThemeButton onChange={() => this.changeTheme()} />
-						</Header>
-					}
-					menu={<Menu theme={this.state.theme} />}
-					content={
-						this.state.loading ? (
-							<LoadingIcon theme={this.state.theme} />
-						) : (
-							<Hotels theme={this.state.theme} hotels={this.state.hotels} />
-						)
-					}
-					footer={<Footer theme={this.state.theme} />}
+		const menu = <Menu />;
+
+		const content = this.state.loading ? (
+			<LoadingIcon />
+		) : (
+			<Hotels hotels={this.state.hotels} />
+		);
+
+		const footer = <Footer />;
+
+		return (
+			<ThemeContext.Provider value="warning">
+				{/* <Header onSearch={(termUse) => this.searchHandler(termUse)} /> */}
+				<Layout 
+					header={header} 
+					menu={menu} 
+					content={content} 
+					footer={footer} 
 				/>
-			</div>
+			</ThemeContext.Provider>
 		);
 	}
 }
