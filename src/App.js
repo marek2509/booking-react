@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -11,104 +11,83 @@ import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
 
-class App extends Component {
+const backendHotels = [
+	{
+		id: 1,
+		name: 'Pod akacjami',
+		city: 'Białystok',
+		rating: 8.3,
+		description:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+		image: '',
+	},
+	{
+		id: 2,
+		name: 'Poniatowski',
+		city: 'Suchowola',
+		rating: 8.2,
+		description:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+		image: '',
+	},
+];
 
-	hotels = [
-		{
-			id: 1,
-			name: 'Pod akacjami',
-			city: 'Białystok',
-			rating: 8.3,
-			description:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-			image: '',
-		},
-		{
-			id: 2,
-			name: 'Poniatowski',
-			city: 'Suchowola',
-			rating: 8.2,
-			description:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-			image: '',
-		},
-	];
+function App() {
+	const [hotels, setHotels] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [theme, setTheme] = useState('danger');
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-	state = {
-		hotels: [],
-		loading: true,
-		theme: 'danger',
-		isAuthenticated: false,
+	const changeTheme = () => {
+		const newTheme = theme === 'primary' ? 'danger' : 'primary';
+		setTheme(newTheme);
 	};
 
-	// searchHandler(termDec){
-	// 	console.log('szukaj z app', termDec)
-	// 	const hotels = [...this.hotels]
-	// 	.filter(x => x.name.toUpperCase().includes(termDec.toUpperCase()));
-	// 	this.setState({hotels} )
-	// }
-
-	searchHandler = (termDec) => {
+	const searchHandler = (termDec) => {
 		console.log('szukaj z app', termDec);
-		const hotels = [...this.hotels].filter((x) =>
+		const hotelsFiltered = [...backendHotels].filter((x) =>
 			x.name.toUpperCase().includes(termDec.toUpperCase())
 		);
-		this.setState({ hotels });
+		setHotels(hotelsFiltered);
 	};
 
-	changeTheme() {
-		const newTheme = this.state.theme === 'primary' ? 'danger' : 'primary';
-		this.setState({ theme: newTheme });
-	}
-
-	componentDidMount() {
+	useEffect(() => {
 		setTimeout(() => {
-			this.setState({
-				hotels: this.hotels,
-				loading: false,
-			});
+			setHotels(backendHotels);
+			setLoading(false);
 		}, 1000);
-	}
+	}, []);
 
-	render() {
-		const header = (
-			<Header>
-				<Searchbar onSearch={this.searchHandler} />
-				<ThemeButton />
-			</Header>
-		);
+	const header = (
+		<Header>
+			<Searchbar onSearch={searchHandler} />
+			<ThemeButton />
+		</Header>
+	);
 
-		const menu = <Menu />;
+	const menu = <Menu />;
 
-		const content = this.state.loading ? (
-			<LoadingIcon />
-		) : (
-			<Hotels hotels={this.state.hotels} />
-		);
+	const content = loading ? <LoadingIcon /> : <Hotels hotels={hotels} />;
+	const footer = <Footer />;
 
-		const footer = <Footer />;
-
-		return (
-			<AuthContext.Provider 
-				value={{
-					isAuthenticated: this.state.isAuthenticated,
-					login: () => this.setState({isAuthenticated: true}),
-					logout: () => this.setState({isAuthenticated: false}),
-					}}>
-
-
+	return (
+		<AuthContext.Provider
+			value={{
+				isAuthenticated: isAuthenticated,
+				login: () => setIsAuthenticated(true),
+				logout: () => setIsAuthenticated(false),
+			}}
+		>
 			<ThemeContext.Provider
 				value={{
-					color: this.state.theme,
-					onChangeTheme: () => this.changeTheme(),
+					color: theme,
+					onChangeTheme: changeTheme,
 				}}
 			>
-				{/* <Header onSearch={(termUse) => this.searchHandler(termUse)} /> */}
 				<Layout header={header} menu={menu} content={content} footer={footer} />
 			</ThemeContext.Provider>
-			</AuthContext.Provider>
-		);
-	}
+		</AuthContext.Provider>
+	);
 }
 
 export default App;
