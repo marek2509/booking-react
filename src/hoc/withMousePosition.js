@@ -14,7 +14,6 @@ const withMousePosition = (WrapperComponent) => {
 		}
 
 		updateMousePosition = (e) => {
-			console.log(e);
 			this.setState({ x: e.pageX, y: e.pageY });
 		};
 

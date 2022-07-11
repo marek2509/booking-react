@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Searchbar.module.css';
 import ThemeContext from '../../../context/themeContext';
@@ -21,13 +21,27 @@ function Searchbar(props) {
 		}
 	};
 
+
+	// działa jak componentDidMount()
+	// oraz jak componentDidUpdate()
+	//gdy zostanie zmieniona wartość którą śledzi w parametrze
+	// lub gdy brak wartości to gdy zmieni się cokolwiek w całym komponencie
+	const focusInput = () => {
+		const input = document.querySelector('.search');
+		console.log(input.focus());
+	}
+	useEffect(() => { 
+		focusInput();
+	},
+	[]);
+
 	return (
 		<div className="d-flex">
 			<input
 				value={term}
 				onKeyDown={onKeyDownHandler}
 				onChange={(e) => setTerm(e.target.value)}
-				className="form-control"
+				className="form-control search"
 				type="text"
 				placeholder="Szukaj..."
 			/>
