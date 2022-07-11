@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Searchbar.module.css';
 import ThemeContext from '../../../context/themeContext';
@@ -10,6 +10,7 @@ const propTypes = {
 function Searchbar(props) {
 	const [term, setTerm] = useState('');
 	const theme = useContext(ThemeContext);
+	const inputRef = useRef(null);
 
 	const search = () => {
 		props.onSearch(term);
@@ -27,9 +28,9 @@ function Searchbar(props) {
 	//gdy zostanie zmieniona wartość którą śledzi w parametrze
 	// lub gdy brak wartości to gdy zmieni się cokolwiek w całym komponencie
 	const focusInput = () => {
-		const input = document.querySelector('.search');
-		console.log(input.focus());
+		inputRef.current.focus();
 	}
+	
 	useEffect(() => { 
 		focusInput();
 	},
@@ -38,6 +39,7 @@ function Searchbar(props) {
 	return (
 		<div className="d-flex">
 			<input
+				ref={inputRef} // utworzenie referencji z inputRef
 				value={term}
 				onKeyDown={onKeyDownHandler}
 				onChange={(e) => setTerm(e.target.value)}
