@@ -10,6 +10,7 @@ import Footer from './components/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
+import BestHotel from './components/Hotels/BestHotel/BestHotel';
 
 const backendHotels = [
 	{
@@ -76,6 +77,14 @@ function App() {
 		// setHotels(hotelsFiltered);
 		dispatch({ type: 'set-hotels', hotels: newHotels });
 	};
+	const getBestHotel = () => {
+		if (state.hotels.length <= 1 ) {
+			return null;
+		} else {
+			// return state.hotels.sort(h => h.rating).reverse()[0];
+			return state.hotels.sort((a, b) => a.rating > b.rating ? -1 : 1)[0];
+		}
+	};
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -98,7 +107,10 @@ function App() {
 	const content = state.loading ? (
 		<LoadingIcon />
 	) : (
-		<Hotels hotels={state.hotels} />
+		<>
+			<BestHotel getHotel={getBestHotel} />
+			<Hotels hotels={state.hotels} />
+		</>
 	);
 	const footer = <Footer />;
 
