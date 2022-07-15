@@ -9,6 +9,14 @@ const propTypes = {
 };
 
 class Hotels extends Component {
+componentDidUpdate() {
+	console.log("hotels : render");
+}
+
+	shouldComponentUpdate(nextProps) {
+		return this.props.hotels !== nextProps.hotels
+	}
+
 	// static contextType = ThemeContext;
 	render() {
 		return (
@@ -17,7 +25,7 @@ class Hotels extends Component {
 
 				{this.props.hotels.map((hotel) => (
 					<Hotel key={hotel.id} {...hotel} />
-					// <Hotel key={hotel.id} {...hotel} theme={this.context} />
+					// <Hotel key={hotel.id} {...hotel} theme={this.cogintext} />
 				))}
 			</div>
 		);

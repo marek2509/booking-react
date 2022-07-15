@@ -63,15 +63,11 @@ const initialState = {
 	hotels: [],
 	loading: true,
 	isAuthenticated: false,
-	theme: '',
+	theme: 'warning',
 };
 
-const init = (initState) =>{
-	initState.theme = 'warning';
-	return initState;
-}
 function App() {
-	const [state, dispatch] = useReducer(reducer, initialState, init);
+	const [state, dispatch] = useReducer(reducer, initialState);
 
 	const searchHandler = (termDec) => {
 		console.log('szukaj z app', termDec);
