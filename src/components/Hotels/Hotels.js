@@ -1,23 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Hotel from './Hotel/Hotel';
 import styles from './Hotels.module.css';
-// import ThemeContext from '../../context/themeContext';
 
 const propTypes = {
 	hotels: PropTypes.array.isRequired,
 };
 
-class Hotels extends Component {
-componentDidUpdate() {
-	console.log("hotels : render");
-}
-
-	shouldComponentUpdate(nextProps) {
-		return this.props.hotels !== nextProps.hotels
-	}
-
-	// static contextType = ThemeContext;
+class Hotels extends PureComponent {
 	render() {
 		return (
 			<div className={styles.container}>
@@ -25,7 +15,6 @@ componentDidUpdate() {
 
 				{this.props.hotels.map((hotel) => (
 					<Hotel key={hotel.id} {...hotel} />
-					// <Hotel key={hotel.id} {...hotel} theme={this.cogintext} />
 				))}
 			</div>
 		);
