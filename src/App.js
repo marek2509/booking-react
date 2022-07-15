@@ -35,8 +35,8 @@ const backendHotels = [
 const reducer = (state, action) => {
 	switch (action.type) {
 		case 'change-theme':
-			const  theme = state.theme === 'danger' ? 'primary' : 'danger';
-			return {...state, theme };
+			const theme = state.theme === 'danger' ? 'primary' : 'danger';
+			return { ...state, theme };
 		case 'set-loading':
 			return { ...state, loading: action.loading };
 		case 'set-hotels':
@@ -70,7 +70,6 @@ function App() {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	const searchHandler = (termDec) => {
-		console.log('szukaj z app', termDec);
 		const newHotels = [...backendHotels].filter((x) =>
 			x.name.toUpperCase().includes(termDec.toUpperCase())
 		);
