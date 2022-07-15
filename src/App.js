@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -77,14 +77,18 @@ function App() {
 		// setHotels(hotelsFiltered);
 		dispatch({ type: 'set-hotels', hotels: newHotels });
 	};
-	const getBestHotel = () => {
-		if (state.hotels.length <= 1 ) {
-			return null;
-		} else {
-			// return state.hotels.sort(h => h.rating).reverse()[0];
-			return state.hotels.sort((a, b) => a.rating > b.rating ? -1 : 1)[0];
-		}
-	};
+
+	const getBestHotel = useCallback(
+		(options) => {
+			if (state.hotels.length < options.minHotels) {
+				return null;
+			} else {
+				// return state.hotels.sort(h => h.rating).reverse()[0];
+				return state.hotels.sort((a, b) => (a.rating > b.rating ? -1 : 1))[0];
+			}
+		},
+		[state.hotels]
+	);
 
 	useEffect(() => {
 		setTimeout(() => {
