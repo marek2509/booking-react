@@ -81,7 +81,8 @@ function App() {
 
 	const getBestHotel = useCallback(
 		(options) => {
-			if (state.hotels.length < options.minHotels) {
+
+			if (state.hotels.length < 2) {
 				return null;
 			} else {
 				// return state.hotels.sort(h => h.rating).reverse()[0];
@@ -114,7 +115,7 @@ function App() {
 		<LoadingIcon />
 	) : (
 		<>
-			<BestHotel getHotel={getBestHotel} />
+			{getBestHotel() ? <BestHotel getHotel={getBestHotel} /> : null}
 			<Hotels hotels={state.hotels} />
 		</>
 	);
