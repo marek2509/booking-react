@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './Hotel.module.css';
 import hotelImg from '../../../assets/images/hotel.jpg';
 import ThemeContext from '../../../context/themeContext';
+import useAuth from '../../../hooks/useAuth';
 
 const propTypes = {
 	name: PropTypes.string.isRequired,
@@ -22,6 +23,7 @@ const propTypes = {
 
 function Hotel(props) {
 	const theme = useContext(ThemeContext);
+	const [auth] = useAuth();
 	return (
 		<div className={`card  ${styles.hotel}`}>
 			<div className="card-body">
@@ -47,6 +49,10 @@ function Hotel(props) {
 
 					<div className={`col-12 ${styles.contDesc}`}>
 						<p>{props.description}</p>
+						{auth 
+						? <p className="mt-2">Dostępność: 4 pokoje</p> 
+						: <p className="mt-2">Zaloguj</p> 
+						}
 					</div>
 				</div>
 			</div>
