@@ -1,18 +1,8 @@
-
-
-
 export const reducer = (state, action) => {
   switch (action.type) {
     case "change-theme":
       const theme = state.theme === "danger" ? "primary" : "danger";
       return { ...state, theme };
-    case "set-loading":
-      return { ...state, loading: action.loading };
-    case "set-hotels":
-      return {
-        ...state,
-        hotels: action.hotels,
-      };
     case "login":
       return {
         ...state,
@@ -29,8 +19,6 @@ export const reducer = (state, action) => {
 };
 
 export const initialState = {
-  hotels: [],
-  loading: true,
   isAuthenticated: false,
   theme: "warning",
 };

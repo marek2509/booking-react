@@ -1,10 +1,9 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import LastHotel from "../../components/Hotels/LastHotel/LastHotel";
 import useStateStorage from "../../hooks/useStateStorage";
 import useWebsiteTitle from "../../hooks/useWebsiteTitle";
 import BestHotel from "../../components/Hotels/BestHotel/BestHotel";
 import Hotels from "../../components/Hotels/Hotels";
-import ReducerContext from "../../context/reducerContext";
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon";
 
 const backendHotels = [
@@ -31,16 +30,15 @@ const backendHotels = [
 const Home = (props) => {
   useWebsiteTitle("Strona główna");
   const [lastHotel, setLastHotel] = useStateStorage("last-hotel", null);
-  const reducer = useContext(ReducerContext);
+  const [loading, setLoading] = useState(true);
+  const [hotels, setHotels] = useState([{}]);
 
   const getBestHotel = () => {
-    if (reducer.state.hotels.length < 2) {
+    if (hotels.length < 2) {
       return null;
     } else {
-      // return reducer.state.hotels.sort(h => h.rating).reverse()[0];
-      return reducer.state.hotels.sort((a, b) =>
-        a.rating > b.rating ? -1 : 1
-      )[0];
+      // return hotels.sort(h => h.rating).reverse()[0];
+      return hotels.sort((a, b) => (a.rating > b.rating ? -1 : 1))[0];
     }
   };
 
@@ -53,25 +51,21 @@ const Home = (props) => {
   };
 
   useEffect(() => {
-    reducer.dispatch({ type: "set-loading", loading: true });
     setTimeout(() => {
-      // setHotels(backendHotels);
-      // setLoading(false);
-      reducer.dispatch({ type: "set-hotels", hotels: backendHotels });
-      reducer.dispatch({ type: "set-loading", loading: false });
+      setHotels(backendHotels);
+      setLoading(false);
     }, 1000);
   }, []);
 
-  if (reducer.state.loading) {
-    return null;
-  }
-  return (
+  return loading ? (
+    <LoadingIcon />
+  ) : (
     <>
       {lastHotel ? (
         <LastHotel {...lastHotel} onRemove={removeLastHotel} />
       ) : null}
       {getBestHotel() ? <BestHotel getHotel={getBestHotel} /> : null}
-      <Hotels onOpen={openHotel} hotels={reducer.state.hotels} />
+      <Hotels onOpen={openHotel} hotels={hotels} />
     </>
   );
 };

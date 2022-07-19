@@ -1,10 +1,5 @@
 import React, { useReducer } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu";
@@ -19,44 +14,15 @@ import InspiringQuote from "./components/InspiringQuote/InspiringQuote";
 import { reducer, initialState } from "./reducer";
 import Home from "./pages/Home/Home";
 import Hotel from "./pages/Hotel/Hotel";
-import LoadingIcon from "./components/UI/LoadingIcon/LoadingIcon";
-
-const backendHotels = [
-  {
-    id: 1,
-    name: "Pod akacjami",
-    city: "Białystok",
-    rating: 8.3,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: "",
-  },
-  {
-    id: 2,
-    name: "Poniatowski",
-    city: "Suchowola",
-    rating: 8.2,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: "",
-  },
-];
+import Search from "./pages/Search/Search";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const searchHandler = (termDec) => {
-    const newHotels = [...backendHotels].filter((x) =>
-      x.name.toUpperCase().includes(termDec.toUpperCase())
-    );
-    // setHotels(hotelsFiltered);
-    dispatch({ type: "set-hotels", hotels: newHotels });
-  };
-
   const header = (
     <Header>
       <InspiringQuote />
-      <Searchbar onSearch={searchHandler} />
+      <Searchbar />
       <ThemeButton />
     </Header>
   );
@@ -66,10 +32,10 @@ function App() {
   const content = (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/hotele/:id" element={<Hotel />} />
+        <Route path="/wyszukaj/:term" element={<Search />} />
+        <Route path="/" element={<Home />} />
       </Routes>
-      {state.loading ? <LoadingIcon /> : null}
     </>
   );
 
