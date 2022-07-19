@@ -45,7 +45,7 @@ function Hotel(props) {
               </div>
               <div className={`col ${styles.containerRating}`}>
                 <h5>Ocena: {props.rating}</h5>
-                <Link to={`/hotel/${props.id}`}>
+                <Link to={`/hotele/${props.id}`}>
                 <a
                   href="#"
                   onClick={clickHandler}

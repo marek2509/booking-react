@@ -3,9 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams,
   Routes,
 } from "react-router-dom";
 import "./App.css";
@@ -21,6 +18,7 @@ import ReducerContext from "./context/reducerContext";
 import InspiringQuote from "./components/InspiringQuote/InspiringQuote";
 import { reducer, initialState } from "./reducer";
 import Home from "./pages/Home/Home";
+import Hotel from "./pages/Hotel/Hotel";
 
 const backendHotels = [
   {
@@ -65,13 +63,10 @@ function App() {
   const menu = <Menu />;
 
   const content = (
-    <>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-
-        <Route path="/hotel/:id" element={<h1>to jest jakiś hotel</h1>} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/hotele/:id" element={<Hotel />} />
+    </Routes>
   );
 
   const footer = <Footer />;

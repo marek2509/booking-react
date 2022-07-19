@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Menu.module.css";
 import useAuth from "../../hooks/useAuth";
-
+import {Link} from 'react-router-dom';
 function Menu() {
   const [auth, setAuth] = useAuth();
 
@@ -21,7 +21,7 @@ function Menu() {
     <div className={`${styles.menuContainer}`}>
       <ul className={styles.menu}>
         <li className={styles.menuItem}>
-          <a href="#">Home</a>
+          <Link to="/">Home</Link>
         </li>
 
         <li className={styles.menuItem}>
