@@ -5,8 +5,6 @@ import { NavLink } from "react-router-dom";
 
 function Menu() {
   const [auth, setAuth] = useAuth();
-  const [menuIsActive, setMenuActive] = useState(true);
-  const [profileIsActive, setProfileActive] = useState(false);
 
   let activeLink = ({ isActive }) =>
     styles.menuItemLink + " " + (isActive ? styles.menuItemActive : undefined);
@@ -27,7 +25,7 @@ function Menu() {
     <div className={`${styles.menuContainer}`}>
       <ul className={styles.menu}>
         <li className={styles.menuItem}>
-          <NavLink exact to="/" className={activeLink}>
+          <NavLink exact="true" to="/" className={activeLink}>
             Home
           </NavLink>
         </li>
