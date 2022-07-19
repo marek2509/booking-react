@@ -1,25 +1,28 @@
-
-
 .menu {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	text-align: left;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
 .menuItem {
-	display: inline-block;
-	margin: 0 10px;
+  display: inline-block;
+  margin: 0 10px;
 }
 
-.menuItem a {
-	text-decoration: none;
-	color: #6c757d;
+.menuItemLink {
+  text-decoration: none;
+  color: #6c757d;
+}
+
+.menuItemActive {
+  text-decoration: underline;
+  color: #6c757d;
 }
 
 .menuContainer {
-	background-color: #e8e8e8;
-	border: 1px solid #cdcdcd;
-	margin: 10px 0;
-	padding: 10px 0;
+  background-color: #e8e8e8;
+  border: 1px solid #cdcdcd;
+  margin: 10px 0;
+  padding: 10px 0;
 }

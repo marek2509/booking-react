@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Menu.module.css";
 import useAuth from "../../hooks/useAuth";
-import {Link} from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+
 function Menu() {
   const [auth, setAuth] = useAuth();
+  const [menuIsActive, setMenuActive] = useState(true);
+  const [profileIsActive, setProfileActive] = useState(false);
+
+  let activeLink = ({ isActive }) =>
+    styles.menuItemLink + " " + (isActive ? styles.menuItemActive : undefined);
 
   const login = (e) => {
     e.preventDefault();
@@ -21,20 +27,31 @@ function Menu() {
     <div className={`${styles.menuContainer}`}>
       <ul className={styles.menu}>
         <li className={styles.menuItem}>
-          <Link to="/">Home</Link>
+          <NavLink exact to="/" className={activeLink}>
+            Home
+          </NavLink>
         </li>
 
-        <li className={styles.menuItem}>
-          {auth ? (
-            <a href="#" onClick={logout}>
-              Wyloguj
-            </a>
-          ) : (
-            <a href="#" onClick={login}>
+        {auth ? (
+          <>
+            <li className={styles.menuItem}>
+              <NavLink to="/profil" className={activeLink}>
+                Moj profil
+              </NavLink>
+            </li>
+            <li className={styles.menuItem}>
+              <a href="#" onClick={logout} className={styles.menuItemLink}>
+                Wyloguj
+              </a>
+            </li>
+          </>
+        ) : (
+          <li className={styles.menuItem}>
+            <a href="#" onClick={login} className={styles.menuItemLink}>
               Zaloguj
             </a>
-          )}
-        </li>
+          </li>
+        )}
       </ul>
     </div>
   );

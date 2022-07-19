@@ -29,7 +29,7 @@ function Searchbar(props) {
 
   // działa jak componentDidMount()
   // oraz jak componentDidUpdate()
-  //gdy zostanie zmieniona wartość którą śledzi w parametrze
+  //gdy zostanie zmieniona wartość którą śledzi w pamrametrze
   // lub gdy brak wartości to gdy zmieni się cokolwiek w całym komponencie
   const focusInput = () => {
     inputRef.current.focus();
