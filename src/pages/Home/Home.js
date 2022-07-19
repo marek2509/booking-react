@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import LastHotel from "../../components/Hotels/LastHotel/LastHotel";
 import useStateStorage from "../../hooks/useStateStorage";
 import useWebsiteTitle from "../../hooks/useWebsiteTitle";

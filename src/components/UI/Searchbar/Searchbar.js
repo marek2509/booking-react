@@ -1,12 +1,7 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import PropTypes from "prop-types";
 import styles from "./Searchbar.module.css";
 import ThemeContext from "../../../context/themeContext";
 import { useNavigate } from "react-router-dom";
-
-const propTypes = {
-  onSearch: PropTypes.func.isRequired,
-};
 
 function Searchbar(props) {
   const [term, setTerm] = useState("");
@@ -61,6 +56,5 @@ function Searchbar(props) {
   );
 }
 
-Searchbar.propTypes = propTypes;
 
 export default Searchbar;

@@ -35,7 +35,7 @@ function App() {
       <Routes>
         <Route path="/hotele/:id" element={<Hotel />} />
         <Route path="/wyszukaj/:term" element={<Search />} />
-		<Route path="/profil" element={<Profile/>} />
+        <Route path="/profil/*" exact element={<Profile />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </>

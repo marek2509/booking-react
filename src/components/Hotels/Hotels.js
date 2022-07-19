@@ -1,4 +1,4 @@
-import React, { PureComponent, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import Hotel from "./Hotel/Hotel";
 import styles from "./Hotels.module.css";
@@ -30,10 +30,10 @@ function Hotels(props) {
 
 Hotels.propTypes = propTypes;
 
-const areEqual = (prevProps, nextProps) => {
-  console.log(prevProps.hotels === nextProps.hotels);
-  return prevProps.hotels === nextProps.hotels;
-};
+// const areEqual = (prevProps, nextProps) => {
+//   console.log(prevProps.hotels === nextProps.hotels);
+//   return prevProps.hotels === nextProps.hotels;
+// };
 
 // export default React.memo(Hotels, areEqual); // second parametr is optional
 export default Hotels;
