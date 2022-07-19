@@ -53,6 +53,7 @@ const Home = (props) => {
   };
 
   useEffect(() => {
+    reducer.dispatch({ type: "set-loading", loading: true });
     setTimeout(() => {
       // setHotels(backendHotels);
       // setLoading(false);
@@ -62,7 +63,7 @@ const Home = (props) => {
   }, []);
 
   if (reducer.state.loading) {
-    return <LoadingIcon />;
+    return null;
   }
   return (
     <>

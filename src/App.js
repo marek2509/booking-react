@@ -19,6 +19,7 @@ import InspiringQuote from "./components/InspiringQuote/InspiringQuote";
 import { reducer, initialState } from "./reducer";
 import Home from "./pages/Home/Home";
 import Hotel from "./pages/Hotel/Hotel";
+import LoadingIcon from "./components/UI/LoadingIcon/LoadingIcon";
 
 const backendHotels = [
   {
@@ -63,10 +64,13 @@ function App() {
   const menu = <Menu />;
 
   const content = (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/hotele/:id" element={<Hotel />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/hotele/:id" element={<Hotel />} />
+      </Routes>
+      {state.loading ? <LoadingIcon /> : null}
+    </>
   );
 
   const footer = <Footer />;
