@@ -30,7 +30,6 @@ function App() {
 
 	const menu = <Menu />;
 
-<<<<<<< HEAD
   const content = (
     <>
       <Routes>
@@ -41,19 +40,6 @@ function App() {
       </Routes>
     </>
   );
-=======
-	const content = (
-		<>
-			<Routes>
-				<Route path="/hotele/:id" element={<Hotel />} />
-				<Route path="/wyszukaj/:term" element={<Search />} />
-				<Route path="/profil/*" element={<Profile />} />
-				<Route path="/" element={<Home />} />
-			</Routes>
-		</>
-	);
->>>>>>> 04b95668f2a66f8a5f2734296a04836233c97290
-
 	const footer = <Footer />;
 
 	return (
