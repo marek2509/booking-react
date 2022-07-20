@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -20,9 +20,10 @@ import { reducer, initialState } from "./reducer";
 import Home from "./pages/Home/Home";
 import Hotel from "./pages/Hotel/Hotel";
 import Search from "./pages/Search/Search";
-import Profile from "./pages/Profile/Profile";
 import NotFound from "./pages/404/404";
 import Login from "./pages/Auth/Login";
+
+const Profile = lazy(() => import("./pages/Profile/Profile"));
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -39,25 +40,26 @@ function App() {
 
   const content = (
     <>
+      <Suspense fallback={<p>Ładowanie</p>}>
+        <Routes>
+          <Route path="/hotele/:id" element={<Hotel />} />
+          <Route path="/wyszukaj" element={<Search />}>
+            <Route path=":term" element={<Search />} />
+            <Route path="" element={<Search />} />
+          </Route>
 
+          <Route
+            path="/profil/*"
+            element={
+              state.isAuthenticated ? <Profile /> : <Navigate to="/zaloguj" />
+            }
+          />
 
-      <Routes>
-        <Route path="/hotele/:id" element={<Hotel />} />
-        <Route path="/wyszukaj" element={<Search />}>
-          <Route path=":term" element={<Search />} />
-          <Route path="" element={<Search />} />
-        </Route>
-        
-        <Route
-          path="/profil/*"
-          element={
-            state.isAuthenticated ? <Profile /> : <Navigate to="/zaloguj" />
-          }
-        />
-        <Route path="/zaloguj" exact element={<Login />} />
-        <Route path="/" element={<Home />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="/zaloguj" exact element={<Login />} />
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </>
   );
   const footer = <Footer />;
