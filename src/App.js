@@ -21,7 +21,7 @@ import Home from "./pages/Home/Home";
 import Hotel from "./pages/Hotel/Hotel";
 import Search from "./pages/Search/Search";
 import NotFound from "./pages/404/404";
-import Login from "./pages/Auth/Login";
+import Login from "./pages/Auth/Login/Login";
 import ErrorBoundry from "./hoc/ErrorBoundry";
 
 const Profile = lazy(() => import("./pages/Profile/Profile"));
