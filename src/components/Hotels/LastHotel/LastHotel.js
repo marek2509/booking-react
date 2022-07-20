@@ -1,6 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 function LastHotel(props) {
-
   return (
     <div className="card mb-2 bg-light">
       <h6 className="card-header">
@@ -15,10 +15,14 @@ function LastHotel(props) {
           style={{ width: "100px", marginLeft: "auto" }}
           className="d-flex justify-content-between"
         >
-          <a href="#" className="btn btn-sm btn-dark">
+          <Link to={`hotele/${props.id}`} className="btn btn-sm btn-dark">
             Tak
-          </a>
-          <button href="#" onClick={props.onRemove} className="btn btn-sm btn-dark">
+          </Link>
+          <button
+            href="#"
+            onClick={props.onRemove}
+            className="btn btn-sm btn-dark"
+          >
             Nie
           </button>
         </div>

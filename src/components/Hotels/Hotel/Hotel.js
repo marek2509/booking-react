@@ -45,14 +45,11 @@ function Hotel(props) {
               </div>
               <div className={`col ${styles.containerRating}`}>
                 <h5>Ocena: {props.rating}</h5>
-                <Link to={`/hotele/${props.id}`}>
-                <a
-                  href="#"
+                <Link to={`/hotele/${props.id}`}
                   onClick={clickHandler}
                   className={`btn btn-${theme.color} mt-2 px-5`}
                 >
                   Pokaż
-                </a>
                 </Link>
               </div>
             </div>
