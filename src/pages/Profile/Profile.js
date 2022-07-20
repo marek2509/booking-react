@@ -4,6 +4,8 @@ import ProfileDetails from "./ProfileDetails/ProfileDetails";
 import MyHotels from "./MyHotels/MyHotels";
 
 function Profile(props) {
+
+  throw new Error('Problem z net')
   return (
     <div className="card">
       <div className="card-header">
