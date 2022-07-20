@@ -1,5 +1,10 @@
 import React, { useReducer } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu";
@@ -17,6 +22,7 @@ import Hotel from "./pages/Hotel/Hotel";
 import Search from "./pages/Search/Search";
 import Profile from "./pages/Profile/Profile";
 import NotFound from "./pages/404/404";
+import Login from "./pages/Auth/Login";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -33,16 +39,22 @@ function App() {
 
   const content = (
     <>
+
+
       <Routes>
         <Route path="/hotele/:id" element={<Hotel />} />
-        {/* <Route path="/wyszukaj/:term" element={<Search />} /> */}
-
         <Route path="/wyszukaj" element={<Search />}>
           <Route path=":term" element={<Search />} />
           <Route path="" element={<Search />} />
         </Route>
-
-        <Route path="/profil/*" exact element={<Profile />} />
+        
+        <Route
+          path="/profil/*"
+          element={
+            state.isAuthenticated ? <Profile /> : <Navigate to="/zaloguj" />
+          }
+        />
+        <Route path="/zaloguj" exact element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

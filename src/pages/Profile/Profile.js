@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
+import { NavLink, Route, Routes } from "react-router-dom";
 import ProfileDetails from "./ProfileDetails/ProfileDetails";
 import MyHotels from "./MyHotels/MyHotels";
-import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 
 function Profile(props) {
   return (
