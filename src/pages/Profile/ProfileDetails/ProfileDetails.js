@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 
 const ProfileDetails = () => {
@@ -14,6 +15,12 @@ const ProfileDetails = () => {
 	  <button className="btn btn-primary mt-2">Zapisz</button>
     </form>
   );
+=======
+import React from 'react';
+
+const ProfileDetails = () => {
+	return <p>Profile details</p>;
+>>>>>>> 04b95668f2a66f8a5f2734296a04836233c97290
 };
 
 export default ProfileDetails;
