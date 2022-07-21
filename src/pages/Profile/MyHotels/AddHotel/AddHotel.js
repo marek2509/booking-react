@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import LoadingButton from "../../../../components/UI/LoadingButton/LoadingButton";
 
 const AddHotel = (props) => {

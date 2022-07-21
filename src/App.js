@@ -23,7 +23,6 @@ import Search from "./pages/Search/Search";
 import NotFound from "./pages/404/404";
 import Login from "./pages/Auth/Login/Login";
 import ErrorBoundry from "./hoc/ErrorBoundry";
-import AddHotel from "./pages/Profile/MyHotels/AddHotel/AddHotel";
 
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function useStateStorage(key, defaultValue) {
 	const [state, setState] = useState(() => {

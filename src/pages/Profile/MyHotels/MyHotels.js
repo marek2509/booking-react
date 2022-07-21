@@ -1,6 +1,5 @@
 import React from "react";
-import { Link, Route, Routes } from "react-router-dom";
-import AddHotel from "./AddHotel/AddHotel";
+import { Link } from "react-router-dom";
 
 const MyHotels = () => (
   <div>
