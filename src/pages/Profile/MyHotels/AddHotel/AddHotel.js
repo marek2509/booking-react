@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import LoadingButton from "../../../../components/UI/LoadingButton/LoadingButton";
+import Input from "../../../../components/Input/Input";
 
 const AddHotel = (props) => {
   const imageRef = useRef();
@@ -22,18 +23,6 @@ const AddHotel = (props) => {
     setLoading(true);
   };
 
-  const changeFeatureHandler = (e) => {
-    const value = e.target.value;
-
-    if (e.target.checked) {
-      const newFeatures = [...form.features, value];
-      setForm({ ...form, features: newFeatures });
-    } else {
-      const newFeatures = form.features.filter((x) => x !== value);
-      setForm({ ...form, features: newFeatures });
-    }
-  };
-
   return (
     <div className="card">
       <div className="card-header">Nowy hotel</div>
@@ -41,59 +30,60 @@ const AddHotel = (props) => {
         <p className="text-muted">Uzupełnij dane hotelu</p>
 
         <form onSubmit={submit}>
-          <div className="form-group">
-            <label>Nazwa</label>
-            <input
-              value={form.name}
-              type="text"
-              className={`form-control ${false ? "is-invalid" : ""} }`}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-            />
-            <div className="invalid-feedback">Błąd</div>
-          </div>
+          <Input
+            label="Nazwa"
+            value={form.name}
+            onChange={(value) => setForm({ ...form, name: value })}
+            error=""
+            showErrors={false}
+          />
 
-          <div className="form-group">
-            <label>Opis</label>
-            <textarea
-              value={form.description}
-              type="text"
-              className={`form-control ${false ? "is-invalid" : ""} }`}
-              onChange={(e) =>
-                setForm({ ...form, description: e.target.value })
-              }
-            />
-            <div className="invalid-feedback">Błąd</div>
-          </div>
+          <Input
+            label="Opis"
+            value={form.description}
+            onChange={(value) => setForm({ ...form, description: value })}
+            error=""
+            showErrors={false}
+          />
 
-          <div className="form-group">
-            <label>Miejscowość</label>
-            <input
-              value={form.city}
-              type="text"
-              className={`form-control ${false ? "is-invalid" : ""} }`}
-              onChange={(e) => setForm({ ...form, city: e.target.value })}
-            />
-            <div className="invalid-feedback">Błąd</div>
-          </div>
+          <Input
+            label="Miejscowość"
+            value={form.city}
+            onChange={(value) => setForm({ ...form, city: value })}
+            error=""
+            showErrors={false}
+          />
 
-          <div className="form-group">
-            <label>Ilość pokoi</label>
-            <select
-              value={form.rooms}
-              type="text"
-              className={`form-control ${false ? "is-invalid" : ""} }`}
-              onChange={(e) => setForm({ ...form, rooms: e.target.value })}
-            >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-            <div className="invalid-feedback">Błąd</div>
-          </div>
+          <Input
+            label="Ilość pokoi"
+            value={form.rooms}
+            type="select"
+            onChange={(value) => setForm({ ...form, rooms: value })}
+            options={[
+              { valie: 1, label: 1 },
+              { valie: 2, label: 2 },
+              { valie: 3, label: 3 },
+              { valie: 4, label: 4 },
+            ]}
+            error=""
+            showErrors={false}
+          />
+
 
           <h4 className="mt-3">Udogodnienia</h4>
-          <div className="form-group">
+
+          <Input
+          type ="checkbox"
+            value={form.features}
+            onChange={(value) => setForm({ ...form, features: value })}
+            options={[
+                {value: 'tv', label:"TV"},
+            ]}
+            error=""
+            showErrors={false}
+          />
+
+          {/* <div className="form-group">
             <div className="custom-control custom-checkbox">
               <input
                 className="custom-control-input"
@@ -133,7 +123,7 @@ const AddHotel = (props) => {
                 Parking
               </label>
             </div>
-          </div>
+          </div> */}
 
           <h4 className="mt-3">Zdjęcie</h4>
           <div className="form-group">
