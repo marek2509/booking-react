@@ -9,6 +9,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [valid, setValid] = useState(null);
 
   const submit = (e) => {
     e.preventDefault();
@@ -16,32 +17,44 @@ export default function Login() {
 
     setTimeout(() => {
       // logowanie
-      setAuth(true); // nie trzeba ustawiać false bo będzie przekierowanie
-      navigate("/");
+      if (true) {
+        setAuth(true); // nie trzeba ustawiać false bo będzie przekierowanie
+        navigate("/");
+      } else {
+        setValid(false);
+        setPassword("");
+      }
+      setLoading(false);
     }, 500);
     console.log(email, password);
   };
   return (
-    <form onSubmit={submit}>
-      <div className="form-group">
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <label>Hasło</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="form-control"
-        />
-      </div>
-      <LoadingButton loading={loading}>Zaloguj</LoadingButton>
-    </form>
+    <div>
+      <h2>Logowanie</h2>
+      {valid === false ? (
+        <div className="alert alert-danger">Niepoprawne dane logowania</div>
+      ) : null}
+      <form onSubmit={submit}>
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label>Hasło</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="form-control"
+          />
+        </div>
+        <LoadingButton loading={loading}>Zaloguj</LoadingButton>
+      </form>
+    </div>
   );
 }

@@ -13,6 +13,6 @@ export default function LoadingButton(props) {
       <span className="sr-only">Ładowanie...</span>
     </button>
   ) : (
-    <button className={`btn ${className} mt-2`}>{props.children}</button>
+    <button {...props} className={`btn ${className} mt-2`}>{props.children}</button>
   );
 }
