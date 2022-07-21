@@ -23,6 +23,7 @@ import Search from "./pages/Search/Search";
 import NotFound from "./pages/404/404";
 import Login from "./pages/Auth/Login/Login";
 import ErrorBoundry from "./hoc/ErrorBoundry";
+import AddHotel from "./pages/Profile/MyHotels/AddHotel/AddHotel";
 
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 
@@ -45,6 +46,7 @@ function App() {
         <Suspense fallback={<p>Ładowanie</p>}>
           <Routes>
             <Route path="/hotele/:id" element={<Hotel />} />
+
             <Route path="/wyszukaj" element={<Search />}>
               <Route path=":term" element={<Search />} />
               <Route path="" element={<Search />} />
@@ -55,9 +57,11 @@ function App() {
               element={
                 state.isAuthenticated ? <Profile /> : <Navigate to="/zaloguj" />
               }
-            />
+            >
 
-            <Route path="/zaloguj" exact element={<Login />} />
+            </Route>
+
+            <Route path="/zaloguj" element={<Login />} />
             <Route path="/" element={<Home />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

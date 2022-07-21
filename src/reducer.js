@@ -19,6 +19,6 @@ export const reducer = (state, action) => {
 };
 
 export const initialState = {
-  isAuthenticated: false,
+  isAuthenticated: true,
   theme: "warning",
 };
