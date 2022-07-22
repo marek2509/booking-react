@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Menu.module.css";
 import useAuth from "../../hooks/useAuth";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Menu() {
   const [auth, setAuth] = useAuth();
@@ -44,11 +44,17 @@ function Menu() {
             </li>
           </>
         ) : (
-          <li className={styles.menuItem}>
+<>          <li className={styles.menuItem}>
             <a href="#" onClick={login} className={styles.menuItemLink}>
               Zaloguj
             </a>
           </li>
+          <li className={styles.menuItem}>
+            <NavLink to="/rejestracja" className={activeLink}>
+              Zarejestruj
+            </NavLink>
+          </li>
+</>
         )}
       </ul>
     </div>

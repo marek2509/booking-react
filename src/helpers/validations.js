@@ -18,21 +18,19 @@ const availableRules = {
       ? ""
       : `Min. liczba znaków: ${rule.length}`;
   },
+  email(value) {
+    return validateEmail(value) ? "" : "Niepoprawny adres email";
+  },
 };
 
 //validation
 export function validate(rules = [], value) {
   for (let i = 0; i < rules.length; i++) {
     let rule = rules[i];
-    console.log(rule);
     if (rule instanceof Object) {
       const errorMessage = availableRules[rule.rule](value, rule);
 
-
       if (errorMessage) {
-        console.log(errorMessage);
-        console.log(errorMessage);
-        console.log(errorMessage);
         return errorMessage;
       }
     } else {

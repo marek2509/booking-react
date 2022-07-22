@@ -47,9 +47,7 @@ const ProfileDetails = () => {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className={`form-control ${
-            errors.email ? "is-invalid" : "is-valid"
-          } }`}
+          className={`form-control ${errors.email ? "is-invalid" : "is-valid"}`}
         />
         <div className="invalid-feedback">{errors.email}</div>
         <div className="valid-feedback">Wszystko ok</div>
@@ -60,13 +58,18 @@ const ProfileDetails = () => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className={`form-control ${
-            errors.password ? "is-invalid" : "is-valid"
-          } }`}
+          className={`form-control${
+            errors.password ? " is-invalid" : " is-valid"
+          }`}
         />
         <div className="invalid-feedback">{errors.password}</div>
       </div>
-      <LoadingButton loading={loading} disabled={errors.password || errors.email}>Zapisz</LoadingButton>
+      <LoadingButton
+        loading={loading}
+        disabled={errors.password || errors.email}
+      >
+        Zapisz
+      </LoadingButton>
     </form>
   );
 };

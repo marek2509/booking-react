@@ -11,7 +11,7 @@ const InputText = (props) => {
         type={props.type}
         className={`form-control ${
           props.error && props.showError ? "is-invalid" : ""
-        } }`}
+        }`}
       />
       <div className="invalid-feedback">{props.error}</div>
     </div>
@@ -28,7 +28,7 @@ const InputTextarea = (props) => {
         type={props.type}
         className={`form-control ${
           props.error && props.showError ? "is-invalid" : ""
-        } }`}
+        }`}
       />
       <div className="invalid-feedback">{props.error}</div>
     </div>
@@ -42,7 +42,7 @@ const InputSelect = (props) => {
       <select
         value={props.value}
         onChange={(e) => props.onChange(e.target.value)}
-        className={`form-control ${false ? "is-invalid" : ""} }`}
+        className={`form-control ${false ? "is-invalid" : ""}`}
       >
         {props.options.map((option) => {
           return (
@@ -140,6 +140,8 @@ const InputCheckbox = (props) => {
     </div>
   );
 };
+
+
 
 function Input(props) {
   switch (props.type) {

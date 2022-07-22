@@ -26,7 +26,6 @@ export default function Login() {
       }
       setLoading(false);
     }, 500);
-    console.log(email, password);
   };
   return (
     <div>

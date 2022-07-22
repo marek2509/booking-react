@@ -23,6 +23,7 @@ import Search from "./pages/Search/Search";
 import NotFound from "./pages/404/404";
 import Login from "./pages/Auth/Login/Login";
 import ErrorBoundry from "./hoc/ErrorBoundry";
+import Register from "./pages/Auth/Register/Register";
 
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 
@@ -61,6 +62,7 @@ function App() {
             </Route>
 
             <Route path="/zaloguj" element={<Login />} />
+            <Route path="/rejestracja" element={<Register />} />
             <Route path="/" element={<Home />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

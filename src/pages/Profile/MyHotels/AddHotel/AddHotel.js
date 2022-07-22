@@ -67,29 +67,6 @@ const AddHotel = (props) => {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-
-    const test = {
-      name: {
-        value: "",
-        error: "",
-        showError: false,
-        rules: ["required"],
-      },
-      description: {
-        value: "",
-        error: "",
-        showError: false,
-        rules: ["required"],
-      },
-    };
-
-    console.log("--------");
-    console.log(test);
-    console.log("--------");
-    console.log(test.description);
-    console.log("--------");
-    console.log(test["description"].rules);
-    console.log("--------");
   };
 
   const changeHandler = (value, fieldName) => {
