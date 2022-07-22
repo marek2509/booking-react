@@ -1,121 +1,197 @@
-import React, { useRef, useState } from 'react';
-import LoadingButton from '../../../../components/UI/LoadingButton/LoadingButton';
-import Input from '../../../../components/Input/Input';
+import React, { useRef, useState } from "react";
+import LoadingButton from "../../../../components/UI/LoadingButton/LoadingButton";
+import Input from "../../../../components/Input/Input";
+import { validate } from "../../../../helpers/validations";
 
 const AddHotel = (props) => {
-	const [form, setForm] = useState({
-		name: '',
-		description: '',
-		city: '',
-		rooms: '',
-		features: [],
-		image: null,
-		status: 0,
-	});
+  //   const [form, setForm] = useState({
+  //     name: "",
+  //     description: "",
+  //     city: "",
+  //     rooms: "",
+  //     features: [],
+  //     image: null,
+  //     status: 0,
+  //   });
 
-	const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({
+    name: {
+      value: "",
+      error: "",
+      showError: false,
+      rules: ["required", { rule: "min", length: 4 }],
+    },
+    description: {
+      value: "",
+      error: "",
+      showError: false,
+      rules: ["required" ,{ rule: "min", length: 10 }],
+    },
+    city: {
+      value: "",
+      error: "",
+      showError: false,
+      rules: ["required"],
+    },
+    rooms: {
+      value: "2",
+      error: "",
+      showError: false,
+      rules: ["required"],
+    },
+    features: {
+      value: [],
+      error: "",
+      showError: false,
+      rules: [],
+    },
+    image: {
+      value: null,
+      error: "",
+      showError: false,
+      rules: [],
+    },
+    status: {
+      value: "",
+      error: "",
+      showError: false,
+      rules: ["required"],
+    },
+  });
 
-	const submit = (e) => {
-		e.preventDefault();
-		setLoading(true);
-		setTimeout(() => {
+  const [loading, setLoading] = useState(false);
+
+  const submit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
       setLoading(false);
     }, 500);
 
-  console.log(form);
-	};
+    const test = {
+      name: {
+        value: "",
+        error: "",
+        showError: false,
+        rules: ["required"],
+      },
+      description: {
+        value: "",
+        error: "",
+        showError: false,
+        rules: ["required"],
+      },
+    };
 
-	return (
-		<div className="card">
-			<div className="card-header">Nowy hotel</div>
-			<div className="card-body">
-				<p className="text-muted">Uzupełnij dane hotelu</p>
+    console.log("--------");
+    console.log(test);
+    console.log("--------");
+    console.log(test.description);
+    console.log("--------");
+    console.log(test["description"].rules);
+    console.log("--------");
+  };
 
-				<form onSubmit={submit}>
-					<Input
-						label="Nazwa"
-						value={form.name}
-						onChange={(value) => setForm({ ...form, name: value })}
-						error=""
-						showErrors={false}
-					/>
+  const changeHandler = (value, fieldName) => {
+    const error = validate(form[fieldName].rules, value);
+    setForm({
+      ...form,
+      [fieldName]: {
+        ...form[fieldName],
+        value: value,
+        showError: true,
+        error: error,
+      },
+    });
+  };
 
-					<Input
-						label="Opis"
-            type="textarea"
-						value={form.description}
-						onChange={(value) => setForm({ ...form, description: value })}
-						error=""
-						showErrors={false}
-					/>
+  return (
+    <div className="card">
+      <div className="card-header">Nowy hotel</div>
+      <div className="card-body">
+        <p className="text-muted">Uzupełnij dane hotelu</p>
 
-					<Input
-						label="Miejscowość"
-						value={form.city}
-						onChange={(value) => setForm({ ...form, city: value })}
-						error=""
-						showErrors={false}
-					/>
-
-					<Input
-						label="Ilość pokoi"
-						value={form.rooms}
-						type="select"
-						onChange={(value) => setForm({ ...form, rooms: value })}
-						options={[
-							{ value: 1, label: 1 },
-							{ value: 2, label: 2 },
-							{ value: 3, label: 3 },
-							{ value: 4, label: 4 },
-						]}
-						error=""
-						showErrors={false}
-					/>
-
-					<h4 className="mt-3">Udogodnienia</h4>
-
-					<Input
-						type="checkbox"
-						value={form.features}
-						onChange={(value) => setForm({ ...form, features: value })}
-						options={[
-							{ value: 'tv', label: 'TV' },
-							{ value: 'wifi', label: 'Wi-fi' },
-							{ value: 'parking', label: 'Parking' },
-						]}
-						error=""
-						showErrors={false}
-					/>
-
-					<h4 className="mt-3">Zdjęcie</h4>
-					<Input
-						type="file"
-						onChange={(value) => setForm({ ...form, image: value })}
-					/>
-
-					<h4 className="mt-3">Aktywny</h4>
+        <form onSubmit={submit}>
+          <Input
+            label="Nazwa"
+            value={form.name.value}
+            onChange={(val) => changeHandler(val, "name")}
+            error={form.name.error}
+            showError={form.name.showError}
+          />
 
           <Input
-						type="radio"
-						value={form.status}
-						onChange={(value) => setForm({ ...form, status: value })}
-						name="status"
+            label="Opis"
+            type="textarea"
+            value={form.description.value}
+            onChange={(val) => changeHandler(val, "description")}
+            error={form.description.error}
+            showError={form.description.showError}
+          />
+
+          <Input
+            label="Miejscowość"
+            value={form.city.value}
+            onChange={(val) => changeHandler(val, "city")}
+            error={form.city.error}
+            showError={form.city.showError}
+          />
+
+          <Input
+            label="Ilość pokoi"
+            value={form.rooms.value}
+            type="select"
+            onChange={(val) => changeHandler(val, "rooms")}
             options={[
-							{ label: 'Aktywny', value: 1, },
-							{ label: 'Ukryty', value: 0, },
+              { value: 1, label: 1 },
+              { value: 2, label: 2 },
+              { value: 3, label: 3 },
+              { value: 4, label: 4 },
+            ]}
+            error={form.rooms.error}
+            showError={form.rooms.showError}
+          />
 
-						]}
-					/>
+          <h4 className="mt-3">Udogodnienia</h4>
 
-					<div className="text-right">
-						<LoadingButton loading={loading} className="btn-success">
-							Dodaj hotel
-						</LoadingButton>
-					</div>
-				</form>
-			</div>
-		</div>
-	);
+          <Input
+            type="checkbox"
+            value={form.features.value}
+            onChange={(val) => changeHandler(val, "features")}
+            options={[
+              { value: "tv", label: "TV" },
+              { value: "wifi", label: "Wi-fi" },
+              { value: "parking", label: "Parking" },
+            ]}
+            error={form.features.error}
+            showError={form.features.showError}
+          />
+
+          <h4 className="mt-3">Zdjęcie</h4>
+          <Input type="file" onChange={(val) => changeHandler(val, "image")} />
+
+          <h4 className="mt-3">Aktywny</h4>
+
+          <Input
+            type="radio"
+            value={form.status.value}
+            onChange={(val) => changeHandler(val, "status")}
+            name="status"
+            options={[
+              { label: "Aktywny", value: 1 },
+              { label: "Ukryty", value: 0 },
+            ]}
+          />
+
+          <div className="text-right">
+            <LoadingButton loading={loading} className="btn-success">
+              Dodaj hotel
+            </LoadingButton>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default AddHotel;

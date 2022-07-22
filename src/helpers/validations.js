@@ -7,3 +7,40 @@ export function validateEmail(text) {
 export function validatePassword(text) {
   return text.length >= 4 || text.length === 0;
 }
+
+// rules
+const availableRules = {
+  required(value) {
+    return value ? "" : "Pole wymagane";
+  },
+  min(value, rule) {
+    return value.length >= rule.length
+      ? ""
+      : `Min. liczba znaków: ${rule.length}`;
+  },
+};
+
+//validation
+export function validate(rules = [], value) {
+  for (let i = 0; i < rules.length; i++) {
+    let rule = rules[i];
+    console.log(rule);
+    if (rule instanceof Object) {
+      const errorMessage = availableRules[rule.rule](value, rule);
+
+
+      if (errorMessage) {
+        console.log(errorMessage);
+        console.log(errorMessage);
+        console.log(errorMessage);
+        return errorMessage;
+      }
+    } else {
+      const errorMessage = availableRules[rule](value);
+      if (errorMessage) {
+        return errorMessage;
+      }
+    }
+  }
+  return "";
+}
