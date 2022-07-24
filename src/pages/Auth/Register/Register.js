@@ -26,6 +26,7 @@ export default function Register(props) {
 	});
 
 	const [Valid1, setValid] = useState(false);
+	const [error, setError] = useState('');
 
 	const submit = async (e) => {
 		e.preventDefault();
@@ -46,6 +47,14 @@ export default function Register(props) {
 			history('/');
 		} catch (error) {
 			console.log(error.response);
+			const errorMessage = error.response.data.error.message;
+			if (errorMessage === 'EMAIL_EXISTS') {
+				setError('Takie email już istnieje');
+			} else if (errorMessage === 'WEAK_PASSWORD : Password should be at least 6 characters') {
+				setError('Twoje hasło jest zbyt słabe.');
+			} else {
+				setError(errorMessage);
+			}
 		}
 
 		setLoading(false);
@@ -98,7 +107,7 @@ export default function Register(props) {
 						error={form.password.error}
 						showError={form.password.showError}
 					/>
-
+					{error ? <div className="alert alert-danger">{error}</div> : null}
 					<div className="text-right">
 						<LoadingButton
 							disabled={!Valid1}
