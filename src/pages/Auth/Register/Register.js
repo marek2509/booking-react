@@ -41,16 +41,22 @@ export default function Register(props) {
 					returnSecureToken: true,
 				}
 			);
-			console.log(resAxios.data);
 
-			setAuth(true, resAxios.data);
+			setAuth(true, {
+				email: resAxios.data.email,
+				token: resAxios.data.idToken,
+				userId: resAxios.data.localId,
+			});
 			history('/');
 		} catch (error) {
 			console.log(error.response);
 			const errorMessage = error.response.data.error.message;
 			if (errorMessage === 'EMAIL_EXISTS') {
 				setError('Takie email już istnieje');
-			} else if (errorMessage === 'WEAK_PASSWORD : Password should be at least 6 characters') {
+			} else if (
+				errorMessage ===
+				'WEAK_PASSWORD : Password should be at least 6 characters'
+			) {
 				setError('Twoje hasło jest zbyt słabe.');
 			} else {
 				setError(errorMessage);

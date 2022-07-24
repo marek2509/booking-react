@@ -9,8 +9,8 @@ export default function useAuth() {
 	// zmienia informacje pokazywaną w dev-tool
 	useDebugValue(auth ? 'Zalogowany' : 'Wylogowany');
 
-	const setAuth = (usAuthenticated, tokenData = null) => {
-		if (usAuthenticated) {
+	const setAuth = (isAuthenticated, tokenData = null) => {
+		if (isAuthenticated) {
 			authContext.login();
 
       if(tokenData){
