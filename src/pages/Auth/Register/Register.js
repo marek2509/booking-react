@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
 import { validate } from '../../../helpers/validations';
 import Input from '../../../components/Input/Input';
-import axiosRaw from 'axios';
+import axios from '../../../axios-auth';
 import useAuth from '../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,14 +33,11 @@ export default function Register(props) {
 		setLoading(true);
 
 		try {
-			const resAxios = await axiosRaw.post(
-				'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC-n5djxzgUrGVEDCi-mfwKPC5jfmpnuIY',
-				{
-					email: form.email.value,
-					password: form.password.value,
-					returnSecureToken: true,
-				}
-			);
+			const resAxios = await axios.post('/accounts:signUp', {
+				email: form.email.value,
+				password: form.password.value,
+				returnSecureToken: true,
+			});
 
 			setAuth(true, {
 				email: resAxios.data.email,

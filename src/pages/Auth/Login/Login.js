@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
-import axiosRaw from 'axios';
+import axios from '../../../axios-auth';
 
 export default function Login() {
 	const [auth, setAuth] = useAuth();
@@ -19,14 +19,11 @@ export default function Login() {
 		setLoading(true);
 
 		try {
-			const res = await axiosRaw.post(
-				'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC-n5djxzgUrGVEDCi-mfwKPC5jfmpnuIY',
-				{
-					email,
-					password,
-					returnSecureToken: true,
-				}
-			);
+			const res = await axios.post('/accounts:signInWithPassword', {
+				email,
+				password,
+				returnSecureToken: true,
+			});
 
 			setAuth(true, {
 				email: res.data.email,
