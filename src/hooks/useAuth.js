@@ -1,21 +1,29 @@
-import { useContext, useDebugValue } from "react";
-import AuthContext from "../context/authContext";
+import { useContext, useDebugValue } from 'react';
+import AuthContext from '../context/authContext';
 
 export default function useAuth() {
-  const authContext = useContext(AuthContext);
+	const authContext = useContext(AuthContext);
 
-  const auth = authContext.isAuthenticated;
+	const auth = authContext.isAuthenticated;
 
-  // zmienia informacje pokazywaną w dev-tool
-  useDebugValue(auth ? "Zalogowany" : "Wylogowany");
+	// zmienia informacje pokazywaną w dev-tool
+	useDebugValue(auth ? 'Zalogowany' : 'Wylogowany');
 
-  const setAuth = (value) => {
-    if (value) {
-      authContext.login();
-    } else {
-      authContext.logout();
-    }
-  };
+	const setAuth = (usAuthenticated, tokenData = null) => {
+		if (usAuthenticated) {
+			authContext.login();
 
-  return [auth, setAuth];
+      if(tokenData){
+        window.localStorage.setItem('token-data', JSON.stringify(tokenData));
+      }
+		} else {
+			authContext.logout();
+
+        window.localStorage.removeItem('token-data', JSON.stringify(tokenData));
+		}
+
+
+	};
+
+	return [auth, setAuth];
 }

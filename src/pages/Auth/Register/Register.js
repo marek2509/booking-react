@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
 import { validate } from '../../../helpers/validations';
 import Input from '../../../components/Input/Input';
-import axios from 'axios';
+import axiosRaw from 'axios';
+import useAuth from '../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register(props) {
+	const history = useNavigate();
+	const [auth, setAuth] = useAuth();
 	const [loading, setLoading] = useState(false);
 	const [form, setForm] = useState({
 		email: {
-			value: '',
+			value: 'marek@email.com',
 			error: 'Pole wymagane',
 			showError: false,
 			rules: ['required', 'email'],
@@ -23,38 +27,28 @@ export default function Register(props) {
 
 	const [Valid1, setValid] = useState(false);
 
-	//   let valid = false;
-	//   valid = Object.values(form).every((x) => x.error == false);
-
 	const submit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
 
-		const resAxios = await axios.get(
-			'https://react-hotels-6b5b6-default-rtdb.europe-west1.firebasedatabase.app/users.json'
-		);
+		try {
+			const resAxios = await axiosRaw.post(
+				'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC-n5djxzgUrGVEDCi-mfwKPC5jfmpnuIY',
+				{
+					email: form.email.value,
+					password: form.password.value,
+					returnSecureToken: true,
+				}
+			);
+			console.log(resAxios.data);
 
-		console.log(resAxios);
-		const response = await fetch(
-			'https://react-hotels-6b5b6-default-rtdb.europe-west1.firebasedatabase.app/users.json',
-			{
-				// method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Accept: 'application/json',
-				},
-				// body: JSON.stringify({
-				// 	email: 'test@email.com',
-				// 	password: 'tajneHaslo',
-				// }),
-			}
-		);
+			setAuth(true, resAxios.data);
+			history('/');
+		} catch (error) {
+			console.log(error.response);
+		}
 
-		const content = await response.json();
-		console.log(content);
-		setTimeout(() => {
-			setLoading(false);
-		}, 500);
+		setLoading(false);
 	};
 
 	const changeHandler = (value, fieldName) => {
@@ -71,9 +65,14 @@ export default function Register(props) {
 	};
 
 	useEffect(() => {
-		console.log(Object.values(form).every((x) => x.error == ''));
 		setValid(Object.values(form).every((x) => x.error == ''));
 	}, [form]);
+
+	useEffect(() => {
+		if (auth) {
+			history('/');
+		}
+	});
 
 	return (
 		<div className="card">
