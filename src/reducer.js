@@ -18,7 +18,17 @@ export const reducer = (state, action) => {
 	}
 };
 
+const checkUser = () => {
+	const tokenData = JSON.parse(window.localStorage.getItem('token-data'));
+
+	if (tokenData) {
+		return true;
+	} else {
+		return false;
+	}
+};
+
 export const initialState = {
-	isAuthenticated: false,
+	isAuthenticated: checkUser(),
 	theme: 'warning',
 };

@@ -50,6 +50,10 @@ export default function Login() {
 		//   }
 	};
 
+	if (auth) {
+		navigate('/');
+	}
+
 	return (
 		<div>
 			<h2>Logowanie</h2>
