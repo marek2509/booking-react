@@ -4,31 +4,22 @@ export const reducer = (state, action) => {
 			const theme = state.theme === 'danger' ? 'primary' : 'danger';
 			return { ...state, theme };
 		case 'login':
+			console.log(action.user, action.testToDelete)
 			return {
 				...state,
-				isAuthenticated: true,
+				user: action.user,
 			};
 		case 'logout':
 			return {
 				...state,
-				isAuthenticated: false,
+				user: false,
 			};
 		default:
 			throw new Error('There is no such action: ' + action.type);
 	}
 };
 
-const checkUser = () => {
-	const tokenData = JSON.parse(window.localStorage.getItem('token-data'));
-
-	if (tokenData) {
-		return true;
-	} else {
-		return false;
-	}
-};
-
 export const initialState = {
-	isAuthenticated: checkUser(),
-	theme: 'warning',
+	user: JSON.parse(window.localStorage.getItem('token-data')),
+	theme: 'danger',
 };

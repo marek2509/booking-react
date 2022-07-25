@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton";
 import { validateEmail, validatePassword } from "../../../helpers/validations";
+import useAuth from '../../../hooks/useAuth';
 
 const ProfileDetails = () => {
-  const [email, setEmail] = useState("maiil@mail.pl");
+  const [auth] = useAuth();
+  const [email, setEmail] = useState(auth.email);
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({

@@ -55,7 +55,7 @@ function App() {
 						<Route
 							path="/profil/*"
 							element={
-								state.isAuthenticated ? <Profile /> : <Navigate to="/zaloguj" />
+								state.user ? <Profile /> : <Navigate to="/zaloguj" />
 							}
 						></Route>
 
@@ -74,8 +74,8 @@ function App() {
 		<Router>
 			<AuthContext.Provider
 				value={{
-					isAuthenticated: state.isAuthenticated,
-					login: () => dispatch({ type: 'login' }),
+					user: state.user,
+					login: (user) => dispatch({ type: 'login', user }),
 					logout: () => dispatch({ type: 'logout' }),
 				}}
 			>

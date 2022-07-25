@@ -39,7 +39,7 @@ export default function Register(props) {
 				returnSecureToken: true,
 			});
 
-			setAuth(true, {
+			setAuth({
 				email: resAxios.data.email,
 				token: resAxios.data.idToken,
 				userId: resAxios.data.localId,
