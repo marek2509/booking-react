@@ -8,13 +8,25 @@ const MyHotels = () => {
 	const [hotels, setHotels] = useState([]);
 	const [auth] = useAuth();
 
+	const deleteHandler = async (id) => {
+		try {
+			const res = await axios.delete(`/hotels/${id}.json`);
+			console.log(res);
+			const afterRemoved = hotels.filter((h) => h.id !== id);
+			setHotels(afterRemoved);
+		} catch (error) {
+			console.log(error.response)
+		}
+	};
+
 	const fetchHotels = async () => {
 		try {
 			const res = await axios.get('/hotels.json');
-			const newHotel = ObjectToArrayWithId(res.data).filter(
+			const newHotels = ObjectToArrayWithId(res.data).filter(
 				(hotel) => hotel.user_id === auth.userId
 			);
-			setHotels(newHotel);
+			setHotels(newHotels);
+			console.log(newHotels);
 		} catch (ex) {
 			console.log(ex.response);
 		}
@@ -40,7 +52,12 @@ const MyHotels = () => {
 								<td>{hotel.name}</td>
 								<td>
 									<button className="btn btn-warning">Edytuj</button>
-									<button className="ml-5 btn btn-danger">Usuń</button>
+									<button
+										onClick={() => deleteHandler(hotel.id)}
+										className="ml-5 btn btn-danger"
+									>
+										Usuń
+									</button>
 								</td>
 							</tr>
 						))}
