@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../../../axios';
 import { ObjectToArrayWithId } from '../../../helpers/objects';
+import useAuth from '../../../hooks/useAuth';
+
 const MyHotels = () => {
 	const [hotels, setHotels] = useState([]);
+	const [auth] = useAuth();
 
 	const fetchHotels = async () => {
 		try {
 			const res = await axios.get('/hotels.json');
-			const newHotel = ObjectToArrayWithId(res.data);
+			const newHotel = ObjectToArrayWithId(res.data).filter(
+				(hotel) => hotel.user_id === auth.userId
+			);
 			setHotels(newHotel);
 		} catch (ex) {
 			console.log(ex.response);
