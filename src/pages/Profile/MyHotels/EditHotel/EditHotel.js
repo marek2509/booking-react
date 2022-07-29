@@ -11,13 +11,15 @@ const EditHotel = (props) => {
 	const id = useParams().id;
 
 	const submit = async (form) => {
-		 await axios.put(`hotels/${id}.json?auth=${auth.token}`, form);
+		await axios.put(`hotels/${id}.json?auth=${auth.token}`, form);
 		navigate('/profil/hotele');
 	};
 
 	const fetchHotel = async () => {
 		try {
 			const res = await axios.get(`hotels/${id}.json`);
+
+			// delete(res.data.user_id);
 			setHotel(res.data);
 		} catch (error) {}
 	};

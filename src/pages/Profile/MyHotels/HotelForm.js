@@ -53,6 +53,9 @@ const HotelForm = (props) => {
 		user_id: {
 			value: '',
 		},
+		rating: {
+			value: '',
+		},
 	});
 
 	const changeHandler = (value, fieldName) => {
