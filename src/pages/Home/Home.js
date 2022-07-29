@@ -29,8 +29,7 @@ const Home = (props) => {
 		try {
 			const res = await axios.get('/hotels.json');
 			const newHotel = ObjectToArrayWithId(res.data).filter(
-				(hotel) => hotel.status == 1
-			);
+				(hotel) => hotel.status == 1);
 			console.log(newHotel);
 			setHotels(newHotel);
 			setLoading(false);

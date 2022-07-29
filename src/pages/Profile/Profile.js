@@ -3,6 +3,7 @@ import { NavLink, Route, Routes } from "react-router-dom";
 import ProfileDetails from "./ProfileDetails/ProfileDetails";
 import MyHotels from "./MyHotels/MyHotels";
 import AddHotel from "./MyHotels/AddHotel/AddHotel";
+import EditHotel from './MyHotels/EditHotel/EditHotel';
 
 function Profile(props) {
   return (
@@ -28,6 +29,7 @@ function Profile(props) {
             <Route path="" element={<ProfileDetails />} />
             <Route path="hotele/*" element={<MyHotels />} />
             <Route path="hotele/dodaj" element={<AddHotel />} />
+            <Route path="hotele/edytuj/:id" element={<EditHotel />} />
           </Routes>
         </div>
         <p>...</p>

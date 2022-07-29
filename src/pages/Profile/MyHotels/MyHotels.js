@@ -15,7 +15,7 @@ const MyHotels = () => {
 			const afterRemoved = hotels.filter((h) => h.id !== id);
 			setHotels(afterRemoved);
 		} catch (error) {
-			console.log(error.response)
+			console.log(error.response);
 		}
 	};
 
@@ -43,6 +43,7 @@ const MyHotels = () => {
 					<thead>
 						<tr>
 							<th>Nazwa</th>
+							<th>Status</th>
 							<th>Opcja</th>
 						</tr>
 					</thead>
@@ -51,7 +52,16 @@ const MyHotels = () => {
 							<tr key={hotel.id}>
 								<td>{hotel.name}</td>
 								<td>
-									<button className="btn btn-warning">Edytuj</button>
+									{hotel.status == 1 ? (
+										<span className="badge bg-success">Aktywny</span>
+									) : (
+										<span className="badge bg-secondary">Ukryty</span>
+									)}
+								</td>
+								<td>
+									<Link to={`/profil/hotele/edytuj/${hotel.id}`} className="btn btn-warning">
+										Edytuj
+									</Link>
 									<button
 										onClick={() => deleteHandler(hotel.id)}
 										className="ml-5 btn btn-danger"
