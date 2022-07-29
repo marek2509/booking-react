@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import axios from '../../../../axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import HotelForm from '../HotelForm';
+import useAuth from '../../../../hooks/useAuth';
 
 const EditHotel = (props) => {
+	const [auth] = useAuth();
 	const navigate = useNavigate();
 	const [hotel, setHotel] = useState(null);
 	const id = useParams().id;
 
 	const submit = async (form) => {
-		 await axios.put(`hotels/${id}.json`, form);
+		 await axios.put(`hotels/${id}.json?auth=${auth.token}`, form);
 		navigate('/profil/hotele');
 	};
 

@@ -37,7 +37,7 @@ function Hotel(props) {
 			<div className="card-body">
 				<div className="row">
 					<div className="col-4">
-						<img src={hotelImg} alt="" className="img-fluid img-thumbnail" />
+						<img src={`https://placeimg.com/220/18${Math.floor(Math.random()*10)}/arch`} alt="" className="img-fluid img-thumbnail" />
 					</div>
 					<div className="col-8">
 						<div className="row">
